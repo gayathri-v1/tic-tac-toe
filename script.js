@@ -18,34 +18,32 @@ tiles.forEach(function(tile){
         count++;
         const value=tile.getAttribute('value');
         marker = (count % 2 == 0) ? 'O' : 'X';
+        if(count <=9){
         tile.textContent=marker;
         game[value]=marker;
-        let result=showResult(); 
-        if(result){
-            //stop the game
-            // click event should stop
-        }  
+        }
+        showResult(count);    
     })
-
-})
-
-
-
-
-
-
+    })
 
 //display the winner result and returns to tile click event
 const cont= document.querySelector('.cont');
 const resultDisplay= document.createElement('p');
 
-function showResult(){
+function showResult(count){
 cont.appendChild(resultDisplay);
 const result=winner(game);
+if (count>=5 && count<9){
 if(winner(game)){
     console.log(result)
     resultDisplay.textContent=result;
 
+}
+}
+if(count===9){
+    if(!winner(game)){
+        resultDisplay.textContent="No one is winner";
+    }
 }
 }
 
@@ -99,7 +97,7 @@ else if(game[0] === game[4] && game[4] === game[8]) {
 else if(game[2] === game[4] && game[4] === game[6]){
     return playerResult(game,2);
 }
-else{
-    return "Nobody is winner!"
-}
+// else{
+//     return "Nobody is winner!"
+// }
 }
