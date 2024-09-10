@@ -13,19 +13,20 @@ const tiles= document.querySelectorAll('.container div');
 let count=0;
 tiles.forEach(function(tile){
    
-    tile.addEventListener('click',function(){
+    tile.addEventListener('click',function(event){
         
         count++;
         const value=tile.getAttribute('value');
         marker = (count % 2 == 0) ? 'O' : 'X';
         tile.textContent=marker;
         game[value]=marker;
-        if(count>=5){
-            showResult();
-            
-            }
-        
+        let result=showResult(); 
+        if(result){
+            //stop the game
+            // click event should stop
+        }  
     })
+
 })
 
 
@@ -34,36 +35,45 @@ tiles.forEach(function(tile){
 
 
 
-//display the winner result
+//display the winner result and returns to tile click event
 const cont= document.querySelector('.cont');
+const resultDisplay= document.createElement('p');
 
 function showResult(){
-const resultDisplay= document.createElement('p');
 cont.appendChild(resultDisplay);
 const result=winner(game);
 if(winner(game)){
-resultDisplay.textContent=result;
+    console.log(result)
+    resultDisplay.textContent=result;
 
 }
 }
 
-//play again button
+//play again button event
 const playAgain= document.createElement('button');
 cont.appendChild(playAgain);
 playAgain.textContent="Play another round";
+playAgain.addEventListener('click',function(){
+    tiles.forEach(function(tile){
+        const value=tile.getAttribute('value');
+        game[value]="";
+        tile.textContent="";
+        resultDisplay.textContent="";
+        count=0;
+    })
+})
 
-
-//If X then return player1 else return player2
+//result returns to winner()
 function playerResult(game,i){
     if(game[i]!==""){
     if(game[i]==='X')
         return 'Winner is Player1';
         return 'Winner is Player2';
 }
-    return 'nobody'
+    // return 'nobody'
 }
 
-//gameboard logic
+//gameboard logic. result returns to showResult()
 function winner(game){   
 if(game[0] === game[3] && game[3] === game[6]) {
     return playerResult(game,0);
