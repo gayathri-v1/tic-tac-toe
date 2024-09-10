@@ -33,7 +33,7 @@ h1,footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: xx-large;
+    font-size: 32px;
     color: rgb(255, 255, 0);
 
 }
@@ -46,6 +46,9 @@ button{
     background-color: transparent;
     border-radius: 20px;
     border: 1px solid black;
+}
+button:active{
+    transform: translateY(4px);
 }
 button:hover{
     background-color: aliceblue;
