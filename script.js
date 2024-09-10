@@ -33,7 +33,7 @@ const resultDisplay= document.createElement('p');
 function showResult(count){
 cont.appendChild(resultDisplay);
 const result=winner(game);
-if (count>=5 && count<9){
+if (count>=5 && count<=9){
 if(winner(game)){
     console.log(result)
     resultDisplay.textContent=result;
@@ -68,7 +68,6 @@ function playerResult(game,i){
         return 'Winner is Player1';
         return 'Winner is Player2';
 }
-    // return 'nobody'
 }
 
 //gameboard logic. result returns to showResult()
@@ -97,7 +96,4 @@ else if(game[0] === game[4] && game[4] === game[8]) {
 else if(game[2] === game[4] && game[4] === game[6]){
     return playerResult(game,2);
 }
-// else{
-//     return "Nobody is winner!"
-// }
 }
